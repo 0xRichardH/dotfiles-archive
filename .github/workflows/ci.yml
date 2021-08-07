@@ -1,0 +1,20 @@
+name: CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+  bootstrap:
+    name: Install dotfiles
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.3
+
+    - name: Install dotfiles
+      run: ./bootstrap.sh
