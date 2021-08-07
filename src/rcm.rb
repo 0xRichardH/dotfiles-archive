@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class InstallRcm
+class Rcm
   attr_reader :version
 
   def initialize(version:)
