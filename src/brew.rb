@@ -7,11 +7,16 @@ class Brew
     end
 
     def install!
-      system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+      homebrew_prefix = ENV["HOMEBREW_PREFIX"]
+
+      if system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+        system "echo 'eval \"$(#{homebrew_prefix}/bin/brew shellenv)\"' >> /home/codespace/.profile"
+        system "eval \"$(#{homebrew_prefix}/bin/brew shellenv)\""
+      end
     end
 
     def exec!(*args)
-      system "echo ${HOMEBREW_PREFIX} brew", *args
+      system "brew", *args
     end
   end
 end
