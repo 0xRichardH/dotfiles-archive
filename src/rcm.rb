@@ -13,17 +13,13 @@ class Rcm
       return
     end
 
-    brew_installed? ? install_from_brew! : install_from_source!
+    Brew.installed? ? install_from_brew! : install_from_source!
   end
 
   private
 
   def installed?
     system "which rcup"
-  end
-
-  def brew_installable?
-    system("which brew")
   end
 
   def install_from_brew!

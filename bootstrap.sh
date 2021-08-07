@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative "./src/brew"
+require_relative "./src/requirements"
 require_relative "./src/preinstall"
 require_relative "./src/git"
 require_relative "./src/rcm"
@@ -14,6 +16,9 @@ DOTFILES_LOCAL_GIT_REPO = "git://github.com/haoxilu/dotfiles-local.git".freeze
 
 # Pre-check
 Preinstall.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).check!
+
+puts "-> 0. Install the system requirements."
+Requirements.new.install!
 
 puts "-> 1. Clone thoughtbot/dotfiles onto the machine"
 Git.new(repo: DOTFILES_GIT_REPO,path: DOTFILES_DIR).clone!
