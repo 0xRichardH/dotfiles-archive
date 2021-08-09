@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative "./src/brew"
-require_relative "./src/preinstall"
+require_relative "./src/prerequirement"
+require_relative "./src/requirements"
 require_relative "./src/git"
 require_relative "./src/rcm"
 require_relative "./src/rcup"
@@ -16,19 +17,22 @@ DOTFILES_LOCAL_GIT_REPO = "git://github.com/haoxilu/dotfiles-local.git".freeze
 
 # Pre-check
 puts "-> 0. Pre-checking"
-Preinstall.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).check!
+Prerequirement.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).check!
 
-puts "-> 1. Clone thoughtbot/dotfiles onto the machine"
+puts "-> 1. Install the system requirements."
+Requirements.new.install!
+
+puts "-> 2. Clone thoughtbot/dotfiles onto the machine"
 Git.new(repo: DOTFILES_GIT_REPO,path: DOTFILES_DIR).clone!
 
-puts "-> 2. Clone haoxilu/dotfiles-local onto the machine"
+puts "-> 3. Clone haoxilu/dotfiles-local onto the machine"
 Git.new(repo: DOTFILES_LOCAL_GIT_REPO,path: DOTFILES_LOCAL_DIR).clone!
 
-puts "-> 3. Install rcm"
+puts "-> 4. Install rcm"
 Rcm.new(version: RCM_VERSION).install!
 
-puts "-> 4. Create symlinks for config files in your home director"
+puts "-> 5. Create symlinks for config files in your home director"
 Rcup.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).execute!
 
-puts "-> 5. Setup Plugins"
+puts "-> 6. Setup Plugins"
 Plugins.new.install!

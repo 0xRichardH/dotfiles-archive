@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Preinstall
+class Prerequirement
   attr_reader :dotfiles_dir, :dotfiles_local_dir
 
   def initialize(dotfiles_dir:, dotfiles_local_dir:)

@@ -27,6 +27,6 @@ class Rcup
   end
 
   def execute_recup!
-    system "env RCRC=$HOME/dotfiles/rcrc rcup"
+    system "env RCRC=$HOME/dotfiles/rcrc rcup", exception: true
   end
 end
