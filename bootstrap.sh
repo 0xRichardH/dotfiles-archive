@@ -16,6 +16,8 @@ DOTFILES_LOCAL_DIR = File.join(HOME_PATH, "dotfiles-local").freeze
 DOTFILES_GIT_REPO = "git://github.com/thoughtbot/dotfiles.git".freeze
 DOTFILES_LOCAL_GIT_REPO = "git://github.com/haoxilu/dotfiles-local.git".freeze
 
+ENV["CI"] = "true"
+
 # Pre-check
 puts "-> 0. Pre-checking"
 Prerequirement.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).check!
