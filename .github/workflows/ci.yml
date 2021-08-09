@@ -3,10 +3,9 @@ name: CI
 on: [push, workflow_dispatch]
 
 jobs:
-  bootstrap:
-    name: Install dotfiles
+  bootstrap-on-ubuntu:
+    name: Ubuntu
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
@@ -18,3 +17,13 @@ jobs:
 
     - name: Install dotfiles
       run: ./bootstrap.sh
+
+  bootstrap-on-macos:
+    name: macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install dotfiles
+        run: ./bootstrap.sh
