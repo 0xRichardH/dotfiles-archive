@@ -22,8 +22,10 @@ class Brew
     end
 
     def config!
-      system "echo 'eval \"$(#{with_prefix} shellenv)\"' >> /home/codespace/.profile", exception: true
-      system "eval \"$(#{with_prefix} shellenv)\"", exception: true
+      if self.with_prefix
+        system "echo 'eval \"$(#{with_prefix} shellenv)\"' >> /home/codespace/.profile", exception: true
+        system "eval \"$(#{with_prefix} shellenv)\"", exception: true
+      end
     end
 
     def exec!(*args)
