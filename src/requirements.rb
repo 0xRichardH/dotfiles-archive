@@ -14,14 +14,14 @@ class Requirements
   end
 
   def install_zsh!
-    unless system("which zsh")
-      Brew.exec! "install", "zsh"
+    unless Command.new("which zsh").runnable?
+      Brew.exec! :install, :zsh
     end
   end
 
   def install_ohmyzsh!
     unless Command.new("echo $ZSH").runnable?
-      system "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"", exception: true
+      Command.new("sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"").run!
     end
   end
 end

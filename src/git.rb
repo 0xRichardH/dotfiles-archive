@@ -20,6 +20,6 @@ class Git
   private
 
   def git_clone!
-    system "git clone #{repo} #{path}", exception: true
+    Command.new("git clone #{repo} #{path}").run!
   end
 end

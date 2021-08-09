@@ -19,15 +19,15 @@ class Rcm
   private
 
   def installed?
-    system "which rcup"
+    Command.new("which rcup").runnable?
   end
 
   def install_from_brew!
-    Brew.exec! "install", "rcm"
+    Brew.exec! :install, :rcm
   end
 
   def install_from_source!
-    system(<<~BASH, exception: true)
+    Command.new(<<~BASH).run!
       curl -LO https://thoughtbot.github.io/rcm/dist/rcm-#{version}.tar.gz &&
 
       tar -xvf rcm-#{version}.tar.gz &&

@@ -17,7 +17,7 @@ class Plugins
   ZSH_FOLDER = Command.new("echo ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}").get_stdout.freeze
 
   def install_hub!
-    Brew.exec! "install", "hub"
+    Brew.exec! :install, :hub
   end
 
   def setup_powerlevel10k!
@@ -37,14 +37,14 @@ class Plugins
   end
 
   def install_overcommit!
-    system "gem install overcommit", exception: true
+    Command.new("gem install overcommit").run!
   end
 
   def install_dip!
-    system "gem install dip", exception: true
+    Command.new("gem install dip").run!
   end
 
   def install_asdf!
-    Brew.exec! "install", "asdf"
+    Brew.exec! :install, :asdf
   end
 end

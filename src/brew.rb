@@ -16,7 +16,7 @@ class Brew
     end
 
     def installed?
-      system "which brew"
+      Command.new("which brew").runnable?
     end
 
     def install!
@@ -27,9 +27,9 @@ class Brew
         return
       end
 
-      if system("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"", exception: true)
-        self.with_prefix = "#{self.prefix}/bin/brew"
-      end
+      Command.new("/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"").run!
+
+      self.with_prefix = "#{self.prefix}/bin/brew"
     end
 
     def exec!(*args)

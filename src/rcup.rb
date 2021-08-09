@@ -19,7 +19,7 @@ class Rcup
   private
 
   def rcup_installed?
-    system "which rcup"
+    Command.new("which rcup").runnable?
   end
 
   def repo_existed?
@@ -27,6 +27,6 @@ class Rcup
   end
 
   def execute_recup!
-    system "env RCRC=$HOME/dotfiles/rcrc rcup", exception: true
+    Command.new("env RCRC=$HOME/dotfiles/rcrc rcup").run!
   end
 end
