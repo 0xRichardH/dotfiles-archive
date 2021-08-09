@@ -28,7 +28,7 @@ class Rcm
 
   def install_from_source!
     system(<<~BASH, exception: true)
-      curl -LO https://thoughtbot.github.io/rcm/dist/rcm-#{version}tar.gz &&
+      curl -LO https://thoughtbot.github.io/rcm/dist/rcm-#{version}.tar.gz &&
 
       tar -xvf rcm-#{version}.tar.gz &&
       cd rcm-#{version} &&

@@ -3,7 +3,7 @@
 class Requirements
   def install!
     install_brew!
-    switch_to_zsh!
+    install_zsh!
     install_ohmyzsh!
   end
 
@@ -13,15 +13,15 @@ class Requirements
     Brew.install!
   end
 
-  def switch_to_zsh!
+  def install_zsh!
     unless system("which zsh")
       Brew.exec! "install", "zsh"
     end
-
-    system("zsh", exception: true)
   end
 
   def install_ohmyzsh!
-    system "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"", exception: true
+    unless Command.new("echo $ZSH").runnable?
+      system "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"", exception: true
+    end
   end
 end

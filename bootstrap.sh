@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative "./src/command"
 require_relative "./src/brew"
 require_relative "./src/prerequirement"
 require_relative "./src/requirements"

@@ -2,7 +2,6 @@
 
 class Plugins
   def install!
-    reconfig_brew!
     install_hub!
     setup_powerlevel10k!
     install_git_open!
@@ -15,18 +14,14 @@ class Plugins
 
   private
 
-  ZSH_FOLDER = "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}".freeze
-
-  def reconfig_brew!
-    Brew.config! unless Brew.installed?
-  end
+  ZSH_FOLDER = Command.new("echo ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}").get_stdout.freeze
 
   def install_hub!
     Brew.exec! "install", "hub"
   end
 
   def setup_powerlevel10k!
-    system "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git #{ZSH_FOLDER}/themes/powerlevel10k", exception: true
+    Git.new(repo: "https://github.com/romkatv/powerlevel10k.git", path: "#{ZSH_FOLDER}/themes/powerlevel10k").clone!
   end
 
   def install_git_open!
