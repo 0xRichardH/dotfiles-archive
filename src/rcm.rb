@@ -23,11 +23,11 @@ class Rcm
   end
 
   def install_from_brew!
-    system "brew install rcm"
+    Brew.exec! "install", "rcm"
   end
 
   def install_from_source!
-    system <<~BASH
+    system(<<~BASH, exception: true)
       curl -LO https://thoughtbot.github.io/rcm/dist/rcm-#{version}tar.gz &&
 
       tar -xvf rcm-#{version}.tar.gz &&

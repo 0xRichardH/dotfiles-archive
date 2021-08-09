@@ -26,7 +26,7 @@ class Plugins
   end
 
   def setup_powerlevel10k!
-    system "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+    system "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k", exception: true
   end
 
   def install_git_open!
@@ -42,11 +42,11 @@ class Plugins
   end
 
   def install_overcommit!
-    system "gem install overcommit"
+    system "gem install overcommit", exception: true
   end
 
   def install_dip!
-    system "gem install dip"
+    system "gem install dip", exception: true
   end
 
   def install_asdf!

@@ -20,6 +20,6 @@ class Git
   private
 
   def git_clone!
-    system "git clone #{repo} #{path}"
+    system "git clone #{repo} #{path}", exception: true
   end
 end
