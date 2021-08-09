@@ -27,6 +27,6 @@ class Rcup
   end
 
   def execute_recup!
-    Command.new("env RCRC=$HOME/dotfiles/rcrc rcup").run!
+    Command.new("env RCRC=$HOME/dotfiles/rcrc rcup -f").run!
   end
 end
