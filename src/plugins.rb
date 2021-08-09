@@ -2,7 +2,7 @@
 
 class Plugins
   def install!
-    install_brew!
+    reconfig_brew!
     install_hub!
     setup_powerlevel10k!
     install_git_open!
@@ -15,10 +15,8 @@ class Plugins
 
   private
 
-  def install_brew!
-    unless Brew.installed?
-      Brew.install!
-    end
+  def reconfig_brew!
+    Brew.config! unless Brew.installed?
   end
 
   def install_hub!
