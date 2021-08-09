@@ -2,6 +2,7 @@
 
 class Plugins
   def install!
+    switch_to_zsh!
     install_brew!
     install_hub!
     setup_powerlevel10k!
@@ -14,6 +15,12 @@ class Plugins
   end
 
   private
+
+  def switch_to_zsh!
+    if system("which zsh")
+      system("zsh", exception: true)
+    end
+  end
 
   def install_brew!
     unless Brew.installed?
