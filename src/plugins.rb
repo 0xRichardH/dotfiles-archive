@@ -8,6 +8,7 @@ class Plugins
     install_zsh_autosuggestions!
     install_zsh_syntax_highlighting!
     install_fzf!
+    install_default_gems!
   end
 
   private
@@ -33,5 +34,17 @@ class Plugins
   def install_fzf!
     Git.new(repo: "https://github.com/junegunn/fzf.git", path: "~/.fzf")
     Command.new("~/.fzf/install").run!
+  end
+
+  def install_default_gems!
+    default_gems_file = File.join(ENV["HOME"], ".default-gems")
+
+    unless File.exist?(default_gems_file)
+      raise "Skipped. The file #{default_gems_file} doesn't exist."
+    end
+
+    File.readlines(default_gems_file).each do |name|
+      Command.new("gem install #{name.chomp}").run!
+    end
   end
 end
