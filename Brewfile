@@ -4,4 +4,4 @@ tap 'homebrew/bundle'
 # Binaries
 brew 'hub'
 brew 'asdf'
-brew 'autojump'
+brew 'autojump', args: ["build-from-source"]

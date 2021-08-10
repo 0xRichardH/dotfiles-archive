@@ -7,6 +7,7 @@ class Plugins
     install_git_open!
     install_zsh_autosuggestions!
     install_zsh_syntax_highlighting!
+    install_fzf!
   end
 
   private
@@ -27,5 +28,10 @@ class Plugins
 
   def install_zsh_syntax_highlighting!
     Git.new(repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", path: "#{ZSH_FOLDER}/plugins/zsh-syntax-highlighting").clone!
+  end
+
+  def install_fzf!
+    Git.new(repo: "https://github.com/junegunn/fzf.git", path: "~/.fzf")
+    Command.new("~/.fzf/install").run!
   end
 end
