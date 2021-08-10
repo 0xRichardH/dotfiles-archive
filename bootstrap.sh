@@ -41,3 +41,7 @@ Rcm.new(version: RCM_VERSION).install!
 
 puts "-> 6. Create symlinks for config files in your home director"
 Rcup.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).execute!
+
+puts "================================================================"
+puts "Done. Congrats, you have successfully installed dotfiles."
+puts "================================================================"
