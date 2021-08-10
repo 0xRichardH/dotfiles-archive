@@ -10,7 +10,7 @@ class Rcup
 
   def execute!
     if rcup_installed? && repo_existed?
-      execute_recup!
+      execute_rcup!
     else
       puts "Skipped."
     end
@@ -26,7 +26,7 @@ class Rcup
     File.directory?(dotfiles_dir) && File.directory?(dotfiles_local_dir)
   end
 
-  def execute_recup!
+  def execute_rcup!
     Command.new("env RCRC=$HOME/dotfiles/rcrc rcup -f").run!
   end
 end
