@@ -2,7 +2,7 @@
 
 class Plugins
   def install!
-    install_hub!
+    Brew.bundle!
     setup_powerlevel10k!
     install_git_open!
     install_zsh_autosuggestions!
@@ -15,10 +15,6 @@ class Plugins
   private
 
   ZSH_FOLDER = Command.new("echo ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}").get_stdout.freeze
-
-  def install_hub!
-    Brew.exec! :install, :hub
-  end
 
   def setup_powerlevel10k!
     Git.new(repo: "https://github.com/romkatv/powerlevel10k.git", path: "#{ZSH_FOLDER}/themes/powerlevel10k").clone!
@@ -42,9 +38,5 @@ class Plugins
 
   def install_dip!
     Command.new("gem install dip").run!
-  end
-
-  def install_asdf!
-    Brew.exec! :install, :asdf
   end
 end

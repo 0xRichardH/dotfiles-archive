@@ -1,2 +1,3 @@
 rcm-*.tar.gz
 rcm-*/
+Brewfile.lock.json
