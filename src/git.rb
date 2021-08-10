@@ -3,7 +3,7 @@
 class Git
   attr_reader :branch, :repo, :path
 
-  def initialize(branch:, repo:, path:)
+  def initialize(branch: nil, repo:, path:)
     @branch = branch
     @repo = repo
     @path = path
