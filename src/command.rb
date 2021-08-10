@@ -7,8 +7,12 @@ class Command
     @command = command
   end
 
-  def run!
-    system command, exception: true
+  def run!(raise_error: true)
+    if !!raise_error
+      system command, exception: true
+    else
+      system command
+    end
   end
 
   def runnable?

@@ -38,7 +38,7 @@ class Brew
 
       # Install all our dependencies with bundle (See Brewfile)
       self.exec! :tap, "homebrew/bundle"
-      self.exec! :bundle, "--file=Brewfile"
+      Command.new("#{with_prefix} bundle --file=Brewfile").run!(raise_error: false)
     end
 
     def exec!(*args)
