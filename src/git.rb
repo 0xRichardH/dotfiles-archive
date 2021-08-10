@@ -21,10 +21,10 @@ class Git
   private
 
   def git_clone!
-    if branch
-      Command.new("git clone -b #{branch} #{repo} #{path}").run!
-    else
+    if branch.nil?
       Command.new("git clone #{repo} #{path}").run!
+    else
+      Command.new("git clone -b #{branch} #{repo} #{path}").run!
     end
   end
 end
