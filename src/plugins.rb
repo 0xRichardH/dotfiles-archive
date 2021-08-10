@@ -33,7 +33,7 @@ class Plugins
 
   def install_fzf!
     Git.new(repo: "https://github.com/junegunn/fzf.git", path: "~/.fzf")
-    Command.new("~/.fzf/install").run!
+    Command.new("~/.fzf/install --all").run!
   end
 
   def install_default_gems!
