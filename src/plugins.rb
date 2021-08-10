@@ -7,9 +7,6 @@ class Plugins
     install_git_open!
     install_zsh_autosuggestions!
     install_zsh_syntax_highlighting!
-    install_overcommit!
-    install_dip!
-    install_asdf!
   end
 
   private
@@ -30,13 +27,5 @@ class Plugins
 
   def install_zsh_syntax_highlighting!
     Git.new(repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git", path: "#{ZSH_FOLDER}/plugins/zsh-syntax-highlighting").clone!
-  end
-
-  def install_overcommit!
-    Command.new("gem install overcommit").run!
-  end
-
-  def install_dip!
-    Command.new("gem install dip").run!
   end
 end
