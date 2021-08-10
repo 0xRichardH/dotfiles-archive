@@ -5,6 +5,7 @@ require_relative "./src/brew"
 require_relative "./src/prerequirement"
 require_relative "./src/requirements"
 require_relative "./src/git"
+require_relative "./src/dotfiles_local"
 require_relative "./src/rcm"
 require_relative "./src/rcup"
 require_relative "./src/plugins"
@@ -26,10 +27,10 @@ puts "-> 1. Install the system requirements."
 Requirements.new.install!
 
 puts "-> 2. Clone thoughtbot/dotfiles onto the machine"
-Git.new(repo: DOTFILES_GIT_REPO,path: DOTFILES_DIR).clone!
+Git.new(repo: DOTFILES_GIT_REPO, path: DOTFILES_DIR).clone!
 
 puts "-> 3. Clone haoxilu/dotfiles-local onto the machine"
-Git.new(repo: DOTFILES_LOCAL_GIT_REPO,path: DOTFILES_LOCAL_DIR).clone!
+DotfilesLocal.new(repo: DOTFILES_LOCAL_GIT_REPO, path: DOTFILES_LOCAL_DIR).clone!
 
 puts "-> 4. Install rcm"
 Rcm.new(version: RCM_VERSION).install!
