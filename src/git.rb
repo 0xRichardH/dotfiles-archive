@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Git
-  attr_reader :repo, :path
+  attr_reader :branch, :repo, :path
 
-  def initialize(repo:, path:)
+  def initialize(branch:, repo:, path:)
+    @branch = branch
     @repo = repo
     @path = path
   end
@@ -20,6 +21,10 @@ class Git
   private
 
   def git_clone!
-    Command.new("git clone #{repo} #{path}").run!
+    if branch
+      Command.new("git clone -b #{branch} #{repo} #{path}").run!
+    else
+      Command.new("git clone #{repo} #{path}").run!
+    end
   end
 end
