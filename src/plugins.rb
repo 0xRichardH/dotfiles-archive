@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class Plugins
+  attr_reader :local, :home
+
+  def initialize(local:, home:)
+    @local = local
+    @home = home
+  end
+
   def install!
     Brew.bundle!
     setup_powerlevel10k!
@@ -32,12 +39,12 @@ class Plugins
   end
 
   def install_fzf!
-    Git.new(repo: "https://github.com/junegunn/fzf.git", path: "~/.fzf")
-    Command.new("~/.fzf/install --all").run!
+    Git.new(repo: "https://github.com/junegunn/fzf.git", path: "#{home}/.fzf").clone!
+    Command.new("#{home}/.fzf/install --all").run!
   end
 
   def install_default_gems!
-    default_gems_file = File.join(ENV["HOME"], ".default-gems")
+    default_gems_file = File.join(local, "default-gems")
 
     unless File.exist?(default_gems_file)
       raise "Skipped. The file #{default_gems_file} doesn't exist."
