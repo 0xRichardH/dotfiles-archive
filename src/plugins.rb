@@ -9,7 +9,7 @@ class Plugins
   end
 
   def install!
-    Brew.bundle!
+    Brew.bundle!(file: File.join(local, "Brewfile"))
     setup_powerlevel10k!
     install_git_open!
     install_zsh_autosuggestions!

@@ -32,13 +32,13 @@ class Brew
       self.with_prefix = "#{self.prefix}/bin/brew"
     end
 
-    def bundle!
+    def bundle!(file:)
       # Update Homebrew recipes
       self.exec! :update
 
-      # Install all our dependencies with bundle (See Brewfile)
+      # Install all our dependencies with bundle
       self.exec! :tap, "homebrew/bundle"
-      Command.new("#{with_prefix} bundle --file=Brewfile").run!(raise_error: false)
+      Command.new("#{with_prefix} bundle --file=#{file}").run!(raise_error: false)
     end
 
     def exec!(*args)
