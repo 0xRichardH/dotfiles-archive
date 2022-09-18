@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./bootstrap.sh > `pwd`/installing.log 2>&1
+./bootstrap.sh > $(pwd)/installing.log 2>&1

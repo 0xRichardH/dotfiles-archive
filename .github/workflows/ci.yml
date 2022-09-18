@@ -16,7 +16,7 @@ jobs:
         ruby-version: 2.7.3
 
     - name: Install dotfiles
-      run: ./bootstrap.sh
+      run: CI=true ./bootstrap.sh
 
   bootstrap-on-macos:
     name: macOS
@@ -26,4 +26,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dotfiles
-        run: ./bootstrap.sh
+        run: CI=true ./bootstrap.sh

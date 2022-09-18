@@ -15,10 +15,8 @@ RCM_VERSION = "1.3.4".freeze
 HOME_PATH = ENV["HOME"].freeze
 DOTFILES_DIR = File.join(HOME_PATH,"dotfiles").freeze
 DOTFILES_LOCAL_DIR = File.join(HOME_PATH, "dotfiles-local").freeze
-DOTFILES_GIT_REPO = "git://github.com/thoughtbot/dotfiles.git".freeze
-DOTFILES_LOCAL_GIT_REPO = "git://github.com/haoxilu/dotfiles-local.git".freeze
-
-ENV["CI"] = "true"
+DOTFILES_GIT_REPO = "https://github.com/thoughtbot/dotfiles.git".freeze
+DOTFILES_LOCAL_GIT_REPO = "https://github.com/haoxilu/dotfiles-local.git".freeze
 
 # Pre-check
 puts "-> 0. Pre-checking"
