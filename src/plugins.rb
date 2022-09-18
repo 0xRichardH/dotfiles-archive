@@ -10,17 +10,22 @@ class Plugins
 
   def install!
     Brew.bundle!(file: File.join(local, "Brewfile"))
+    install_oh_my_zsh!
     setup_powerlevel10k!
     install_git_open!
     install_zsh_autosuggestions!
     install_zsh_syntax_highlighting!
     install_fzf!
-    install_default_gems!
+    install_yarn!
   end
 
   private
 
   ZSH_FOLDER = Command.new("echo ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}").get_stdout.freeze
+
+  def install_oh_my_zsh!
+    Command.new("sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"").run!
+  end
 
   def setup_powerlevel10k!
     Git.new(repo: "https://github.com/romkatv/powerlevel10k.git", path: "#{ZSH_FOLDER}/themes/powerlevel10k").clone!
@@ -43,15 +48,7 @@ class Plugins
     Command.new("#{home}/.fzf/install --all").run!
   end
 
-  def install_default_gems!
-    default_gems_file = File.join(local, "default-gems")
-
-    unless File.exist?(default_gems_file)
-      raise "Skipped. The file #{default_gems_file} doesn't exist."
-    end
-
-    File.readlines(default_gems_file).each do |name|
-      Command.new("gem install #{name.chomp}").run!
-    end
+  def install_yarn!
+    Command.new("npm install --global yarn").run!
   end
 end

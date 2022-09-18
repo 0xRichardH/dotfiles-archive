@@ -15,23 +15,25 @@ RCM_VERSION = "1.3.4".freeze
 HOME_PATH = ENV["HOME"].freeze
 DOTFILES_DIR = File.join(HOME_PATH,"dotfiles").freeze
 DOTFILES_LOCAL_DIR = File.join(HOME_PATH, "dotfiles-local").freeze
-DOTFILES_GIT_REPO = "git://github.com/thoughtbot/dotfiles.git".freeze
-DOTFILES_LOCAL_GIT_REPO = "git://github.com/haoxilu/dotfiles-local.git".freeze
+DOTFILES_GIT_REPO = "https://github.com/thoughtbot/dotfiles.git".freeze
+DOTFILES_LOCAL_GIT_REPO = "https://github.com/haoxilu/dotfiles-local.git".freeze
 
-ENV["CI"] = "true"
+# if ENV["CI"].nil?
+#   # ENV["CI"] = "true"
+# end
 
 # Pre-check
 puts "-> 0. Pre-checking"
-Prerequirement.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).check!
+# Prerequirement.new(dotfiles_dir: DOTFILES_DIR, dotfiles_local_dir: DOTFILES_LOCAL_DIR).check!
 
 puts "-> 1. Install the system requirements."
-Requirements.new.install!
+# Requirements.new.install!
 
 puts "-> 2. Clone thoughtbot/dotfiles onto the machine"
-Git.new(repo: DOTFILES_GIT_REPO, path: DOTFILES_DIR).clone!
+# Git.new(repo: DOTFILES_GIT_REPO, path: DOTFILES_DIR).clone!
 
 puts "-> 3. Clone haoxilu/dotfiles-local onto the machine"
-DotfilesLocal.new(repo: DOTFILES_LOCAL_GIT_REPO, path: DOTFILES_LOCAL_DIR).clone!
+# DotfilesLocal.new(repo: DOTFILES_LOCAL_GIT_REPO, path: DOTFILES_LOCAL_DIR).clone!
 
 puts "-> 4. Setup Plugins"
 Plugins.new(local: DOTFILES_LOCAL_DIR, home: HOME_PATH).install!
