@@ -17,7 +17,6 @@ class Plugins
     install_zsh_syntax_highlighting!
     install_history_sync!
     install_fzf!
-    install_yarn!
   end
 
   private
@@ -51,9 +50,5 @@ class Plugins
   def install_fzf!
     Git.new(repo: "https://github.com/junegunn/fzf.git", path: "#{home}/.fzf").clone!
     Command.new("#{home}/.fzf/install --all").run!
-  end
-
-  def install_yarn!
-    Command.new("npm install --global yarn").run!
   end
 end
