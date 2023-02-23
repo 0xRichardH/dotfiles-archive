@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Plugins
+  include Common
+
   attr_reader :local, :home
 
   def initialize(local:, home:)
@@ -9,7 +11,7 @@ class Plugins
   end
 
   def install!
-    Brew.bundle!(file: File.join(local, "Brewfile"))
+    install_brew_bundles!
     install_oh_my_zsh!
     setup_powerlevel10k!
     install_git_open!
@@ -22,6 +24,14 @@ class Plugins
   private
 
   ZSH_FOLDER = Command.new("echo ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}").get_stdout.freeze
+
+  def install_brew_bundles!
+    Brew.bundle!(file: File.join(local, "Brewfile"))
+
+    unless linux?
+      Brew.bundle!(file: File.join(local, "Brewfile-macOS"))
+    end
+  end
 
   def install_oh_my_zsh!
     Command.new("sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"").run!
