@@ -19,6 +19,7 @@ class Plugins
     install_zsh_syntax_highlighting!
     install_history_sync!
     install_fzf!
+    install_lunarvim!
   end
 
   private
@@ -60,5 +61,9 @@ class Plugins
   def install_fzf!
     Git.new(repo: "https://github.com/junegunn/fzf.git", path: "#{home}/.fzf").clone!
     Command.new("#{home}/.fzf/install --all").run!
+  end
+
+  def install_lunarvim!
+    Common.new("bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)").run!
   end
 end
