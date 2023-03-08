@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Plugins
+  include Common
+
   attr_reader :local, :home
 
   def initialize(local:, home:)
@@ -9,7 +11,7 @@ class Plugins
   end
 
   def install!
-    Brew.bundle!(file: File.join(local, "Brewfile"))
+    install_brew_bundles!
     install_oh_my_zsh!
     setup_powerlevel10k!
     install_git_open!
@@ -17,12 +19,20 @@ class Plugins
     install_zsh_syntax_highlighting!
     install_history_sync!
     install_fzf!
-    install_yarn!
+    install_lunarvim!
   end
 
   private
 
   ZSH_FOLDER = Command.new("echo ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}").get_stdout.freeze
+
+  def install_brew_bundles!
+    Brew.bundle!(file: File.join(local, "Brewfile"))
+
+    unless linux?
+      Brew.bundle!(file: File.join(local, "Brewfile-macOS"))
+    end
+  end
 
   def install_oh_my_zsh!
     Command.new("sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"").run!
@@ -53,7 +63,7 @@ class Plugins
     Command.new("#{home}/.fzf/install --all").run!
   end
 
-  def install_yarn!
-    Command.new("npm install --global yarn").run!
+  def install_lunarvim!
+    Command.new("bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)").run!
   end
 end

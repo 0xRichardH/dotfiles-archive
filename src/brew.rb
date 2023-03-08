@@ -1,15 +1,18 @@
 # frozen_string_literal: true
+
 class Brew
   class << self
+    include Common
+
     attr_accessor :with_prefix
 
     def prefix
-      case Command.new("uname").get_stdout
+      case os_name
       when "Linux"
         ["${HOME}/.linuxbrew", "/home/linuxbrew/.linuxbrew"].detect {
           |p| Command.new("which #{p}/bin/brew").runnable? }
-      when "Darwin"
-        Command.new("uname -m").get_stdout == "arm64" ? "/opt/homebrew" : "/usr/local"
+      when "macOS"
+        os_machine == "arm64" ? "/opt/homebrew" : "/usr/local"
       else
         raise "Homebrew is only supported on macOS and Linux."
       end
